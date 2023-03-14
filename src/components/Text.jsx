@@ -1,27 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { TranslatorContext } from "../provider/TranslatorProvider";
 import "./Text.scss";
 
 export const Text = () => {
 	const { t, changeLanguage } = useContext(TranslatorContext);
 	const [currentLanguage, setCurrentLanguage] = useState(
-		localStorage.getItem("i18nextLng") || navigator.language
+		localStorage.getItem("i18nextLng")
 	);
 
 	const handleLanguageChange = (lang) => {
 		changeLanguage(lang);
 		setCurrentLanguage(lang);
-		localStorage.setItem("i18nextLng", lang);
 	};
 
 	const isLanguage = (lang) => {
 		return currentLanguage.startsWith(lang);
 	};
-
-	useEffect(() => {
-		// Update the language when the component mounts
-		changeLanguage(currentLanguage);
-	}, []);
 
 	return (
 		<>
